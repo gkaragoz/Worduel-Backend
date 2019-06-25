@@ -1,10 +1,17 @@
-const io = require("socket.io");
-const server = io.listen(3000, function () {
-    console.log('listening on *:3000');
-});
+const server = require('http').createServer();
+const io = require('socket.io')(server);
+const uuidv4 = require('uuid/v4');
+const Player = require('./account/player.js') 
 
-server.on('connection', function (socket) {
-    console.log('a user connected');
+// Connected player list.
+let players = [];
+
+io.on('connection', function (socket) {
+    // Create new player.
+    let player = new Player(uuidv4(), socket.id, "gkaragoz", "gökhan", "karagöz", 0)
+    players.push(player);
+    console.log('Player connected: ' + player.username + "(" + player.socketId + ")");
+
     socket.emit("OnConnected");
 
     socket.on('message', function (msg) {
@@ -12,6 +19,19 @@ server.on('connection', function (socket) {
     });
 
     socket.on('disconnect', function () {
-        console.log('user disconnected');
+        for (let ii = 0; ii < players.length; ii++) {
+            const player = players[ii];
+            if (player.socketId === socket.id) {
+                console.log('Player disconnected: ' + players[ii].username + "(" + players[ii].socketId + ")");
+                
+                // Remove player.
+                players.splice(ii, 1);
+            }
+        }
     });
+});
+
+server.listen(3000, function (err) {
+    if (err) throw err
+    console.log('listening on port 3000')
 });
