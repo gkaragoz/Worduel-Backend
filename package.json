@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/gkaragoz/Worduel-Backend#readme",
   "dependencies": {
+    "nodemon": "^1.19.1",
     "socket.io": "^2.2.0"
   }
 }
