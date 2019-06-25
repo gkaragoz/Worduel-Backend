@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/gkaragoz/Worduel-Backend/issues"
   },
-  "homepage": "https://github.com/gkaragoz/Worduel-Backend#readme"
+  "homepage": "https://github.com/gkaragoz/Worduel-Backend#readme",
+  "dependencies": {
+    "socket.io": "^2.2.0"
+  }
 }
