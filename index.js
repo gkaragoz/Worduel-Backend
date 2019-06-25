@@ -26,6 +26,7 @@ io.on('connection', function (socket) {
                 
                 // Remove player.
                 players.splice(ii, 1);
+                break;
             }
         }
     });
