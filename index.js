@@ -5,6 +5,7 @@ const server = io.listen(3000, function () {
 
 server.on('connection', function (socket) {
     console.log('a user connected');
+    socket.emit("OnConnected");
 
     socket.on('message', function (msg) {
         console.log('message: ' + msg);
